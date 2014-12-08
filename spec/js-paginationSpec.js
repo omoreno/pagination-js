@@ -68,4 +68,10 @@ describe("JS pagination tests", function() {
 
 		expect(pagination.getVisiblePagesCount()).toBe(5);
 	});
+
+	it("renders all pages when selected pages to show are more than total pages", function(){
+		pagination.paginate({totalItems: 4, pageSize: 2, visiblePages: 3});
+
+		expect(pagination.getVisiblePagesCount()).toBe(2);
+	});
 });

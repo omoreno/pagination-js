@@ -6,6 +6,8 @@ function Pagination(domId, placeholder) {
 	this.paginate = function(pagination) {
 		var pageCount = getPageCount(pagination);
 		var visiblePages = pagination.visiblePages || pageCount;
+		if (visiblePages > pageCount)
+			visiblePages = pageCount;
 		if (pageCount > 1) {
 			var container = createContainer(domId, placeholder);
 			for (var pageNumber = 1, len = visiblePages; pageNumber <= len; pageNumber++){
