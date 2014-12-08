@@ -1,7 +1,7 @@
 function Pagination(domId, placeholder) {
 	var placeholder = placeholder || document.body;
 	var domId = domId || 'pagination';
-	var goToFirstPageButton, goToLastPageButton, pageCount;
+	var goToFirstPageButton, goToLastPageButton, pageCount, pageClickedCallback;
 	var pages = [];
 	var self = this;
 
@@ -18,6 +18,10 @@ function Pagination(domId, placeholder) {
 			}
 			goToLastPageButton = createGoToLastPageButton(pagination.goToLastPageCaption);
 		}
+	};
+
+	this.onPageClickedCallback = function(callback) {
+		pageClickedCallback = callback;
 	};
 
 	this.getFirstVisiblePage = function() {
@@ -65,6 +69,12 @@ function Pagination(domId, placeholder) {
 		var page = document.createElement('a');
 		page.text = caption || "<<";
 		page.href = "#";
+		page.addEventListener("click", function(e) {
+			for (var i = 0, len = pages.length; i < len; i++)
+        		pages[i].text = i + 1;
+        	pageClickedCallback(1);
+			e.preventDefault();
+		});
 		return page;
 	};
 

@@ -117,4 +117,17 @@ describe("JS pagination tests", function() {
 		expect(goToFirstPageButton.text).toBe("<<");
 		expect(goToLastPageButton.text).toBe(">>");
 	});
+
+	it("goes to first page on go to first page button clicked", function(){
+		pagination.paginate({totalItems: 3, pageSize: 1, visiblePages: 2});
+		var pageClickedCallback = jasmine.createSpy('pageClickedCallback');
+		pagination.onPageClickedCallback(pageClickedCallback);
+		pagination.getLastVisiblePage().click();
+
+		pagination.getGoToFirstPageButton().click();
+
+		expect(pagination.getFirstVisiblePage().text).toBe('1');
+		expect(pagination.getLastVisiblePage().text).toBe('2');
+		expect(pageClickedCallback).toHaveBeenCalledWith(1);
+	});
 });
