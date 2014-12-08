@@ -44,21 +44,29 @@ function Pagination(domId, placeholder) {
 		page.href = "#";
 		page.addEventListener("click", function(e) {
 			var pageNumber = Number(e.target.text);
-			if (pageNumber == lastVisiblePage() && lastVisiblePage() < pageCount)
-				showMorePages();
-            else if (pageNumber == firstVisiblePage() && firstVisiblePage() > 1)
-				showLessPages();
+			if (shouldShowNextPage(pageNumber))
+				showNextPage();
+            else if (shouldShowPreviousPage(pageNumber))
+				showPreviousPage();
 			e.preventDefault();
 		});
 		return page;
 	};
 
-	var showMorePages = function() {
+	var shouldShowNextPage = function(pageNumber) {
+		return pageNumber == lastVisiblePage() && lastVisiblePage() < pageCount;
+	};
+
+	var shouldShowPreviousPage = function(pageNumber) {
+		return pageNumber == firstVisiblePage() && firstVisiblePage() > 1;
+	};
+
+	var showNextPage = function() {
 		for (var i = 0, len = pages.length; i < len; i++)
         	pages[i].text = Number(pages[i].text) + 1;
 	};
 
-	var showLessPages = function() {
+	var showPreviousPage = function() {
         for (var i = 0, len = pages.length; i < len; i++)
         	pages[i].text = Number(pages[i].text) - 1;
 	};
