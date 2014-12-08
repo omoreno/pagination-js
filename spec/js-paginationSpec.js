@@ -44,4 +44,11 @@ describe("JS pagination tests", function() {
 		expect(domElement).toBeDefined();
 		domElement.remove();
 	});
+
+	it("does not render if pagination is just one page", function(){
+		pagination.paginate({totalItems: 10, pageSize: 10});
+
+		var domElement = document.getElementById("pagination");
+		expect(domElement).toBeNull();
+	});
 });

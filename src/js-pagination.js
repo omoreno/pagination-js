@@ -3,11 +3,14 @@ function Pagination(domId, placeholder) {
 	var domId = domId || 'pagination';
 
 	this.paginate = function(pagination) {
-		var container = document.getElementById(domId);
-		if (!container) {
-			container = document.createElement('div');
-			container.id = domId;
-			placeholder.appendChild(container);
+		var pageCount = Math.ceil(pagination.totalItems / pagination.pageSize);
+		if (pageCount > 1) {
+			var container = document.getElementById(domId);
+			if (!container) {
+				container = document.createElement('div');
+				container.id = domId;
+				placeholder.appendChild(container);
+			}
 		}
 	};
 };
