@@ -12,6 +12,7 @@ function Pagination(domId, placeholder) {
 		if (pageCount > 1) {
 			var container = createContainer(domId, placeholder);
 			goToFirstPageButton = createGoToFirstPageButton(pagination.goToFirstPageCaption);
+			container.appendChild(goToFirstPageButton);
 			for (var pageNumber = 1, len = visiblePages; pageNumber <= len; pageNumber++){
 				var page = createPage(pageNumber);
 				pages.push(page);
@@ -19,6 +20,7 @@ function Pagination(domId, placeholder) {
 			}
 			pages[0].classList.add('active');
 			goToLastPageButton = createGoToLastPageButton(pagination.goToLastPageCaption);
+			container.appendChild(goToLastPageButton);
 		}
 	};
 
@@ -88,7 +90,7 @@ function Pagination(domId, placeholder) {
 		page.href = "#";
 		page.addEventListener("click", function(e) {
 			for (var i = 0, len = pages.length; i < len; i++)
-        		pages[i].text = visiblePages + i;
+        		pages[i].text = pageCount - visiblePages + i + 1;
 
         	markPageAsActive(pageCount);
         	pageClickedCallback(pageCount);
