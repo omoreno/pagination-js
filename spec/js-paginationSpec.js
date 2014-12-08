@@ -32,4 +32,14 @@ describe("JS pagination tests", function() {
 		expect(domElements).toBeDefined();
 		expect(domElements.length).not.toBeDefined();
 	});
+
+	it("uses defaults dom id and placeholder if not defined", function(){
+		var pagination = new Pagination();
+
+		pagination.paginate({totalItems: 10, pageSize: 5});
+
+		var domElement = document.getElementById("pagination");
+		expect(domElement).toBeDefined();
+		domElement.remove();
+	});
 });
