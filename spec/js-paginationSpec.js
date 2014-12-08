@@ -83,4 +83,14 @@ describe("JS pagination tests", function() {
 		expect(pagination.getFirstVisiblePage().text).toBe('2');
 		expect(pagination.getLastVisiblePage().text).toBe('3');
 	});
+
+	it("show previous page on first visible page clicked when there are pages before to show", function(){
+		pagination.paginate({totalItems: 3, pageSize: 1, visiblePages: 2});
+		pagination.getLastVisiblePage().click();
+
+		pagination.getFirstVisiblePage().click();
+		
+		expect(pagination.getFirstVisiblePage().text).toBe('1');
+		expect(pagination.getLastVisiblePage().text).toBe('2');
+	});
 });

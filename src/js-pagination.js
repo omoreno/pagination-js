@@ -1,10 +1,12 @@
 function Pagination(domId, placeholder) {
 	var placeholder = placeholder || document.body;
 	var domId = domId || 'pagination';
+	var pageCount;
 	var pages = [];
+	var self = this;
 
 	this.paginate = function(pagination) {
-		var pageCount = getPageCount(pagination);
+		pageCount = getPageCount(pagination);
 		var visiblePages = getVisiblePages(pagination.visiblePages, pageCount);
 		if (pageCount > 1) {
 			var container = createContainer(domId, placeholder);
@@ -41,19 +43,36 @@ function Pagination(domId, placeholder) {
 		page.text = pageNumber;
 		page.href = "#";
 		page.addEventListener("click", function(e) {
-			updatePagination();
+			var pageNumber = Number(e.target.text);
+			if (pageNumber == lastVisiblePage() && lastVisiblePage() < pageCount)
+				showMorePages();
+            else if (pageNumber == firstVisiblePage() && firstVisiblePage() > 1)
+				showLessPages();
 			e.preventDefault();
 		});
 		return page;
 	};
 
-	var updatePagination = function() {
+	var showMorePages = function() {
+		for (var i = 0, len = pages.length; i < len; i++)
+        	pages[i].text = Number(pages[i].text) + 1;
+	};
+
+	var showLessPages = function() {
         for (var i = 0, len = pages.length; i < len; i++)
-            pages[i].text = Number(pages[i].text) + 1;
+        	pages[i].text = Number(pages[i].text) - 1;
 	};
 
 	this.getFirstVisiblePage = function() {
 		return pages[0];
+	};
+
+	var firstVisiblePage = function() {
+		return Number(self.getFirstVisiblePage().text);
+	};
+
+	var lastVisiblePage = function() {
+		return Number(self.getLastVisiblePage().text);
 	};
 
 	this.getLastVisiblePage = function() {
