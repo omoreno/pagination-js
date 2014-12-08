@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>js-paginate Demo</title>
+
+  <style>
+    .active {
+        color: red;
+    }
+    a {
+        color: #606c7a;
+        display: block;
+        font-size: 13px;
+        line-height: 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        height: 32px;
+        line-height: 32px;
+        margin-right: 5px;
+        width: 32px;
+
+    }
+    * {
+        text-rendering: optimizelegibility;
+        box-sizing: border-box;
+    }
+  </style>
+
+  <script src="src/js-pagination.js"></script>
+  <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function(event) { 
+          var pagination = new Pagination("demo-pagination", document.body);
+          pagination.onPageClickedCallback(function(pageNumber) {
+            var demoParagraph = document.getElementById('demo-paragraph');
+            demoParagraph.innerHTML = "You have clicked on page " + pageNumber;
+          });
+
+          pagination.paginate({ totalItems: 100, pageSize: 10,
+                                activePage: 1, visiblePages: 5 });
+
+      });
+  </script>
+</head>
+
+<body>
+  <div id="demo-pagination"></div>
+  <p id="demo-paragraph"></p>
+</body>
+</html>
