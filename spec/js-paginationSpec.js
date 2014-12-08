@@ -62,4 +62,10 @@ describe("JS pagination tests", function() {
 		expect(pagination.getFirstVisiblePage().text).toBe('1');
 		expect(pagination.getLastVisiblePage().text).toBe('2');
 	});
+
+	it("renders selected pages", function(){
+		pagination.paginate({totalItems: 10, pageSize: 1, visiblePages: 5});
+
+		expect(pagination.getVisiblePagesCount()).toBe(5);
+	});
 });

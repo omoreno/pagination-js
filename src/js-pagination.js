@@ -1,18 +1,17 @@
 function Pagination(domId, placeholder) {
 	var placeholder = placeholder || document.body;
 	var domId = domId || 'pagination';
+	var pages = [];
 
 	this.paginate = function(pagination) {
 		var pageCount = getPageCount(pagination);
+		var visiblePages = pagination.visiblePages || pageCount;
 		if (pageCount > 1) {
 			var container = createContainer(domId, placeholder);
-			for (var pageNumber = 1, len = pageCount; pageNumber <= len; pageNumber++){
+			for (var pageNumber = 1, len = visiblePages; pageNumber <= len; pageNumber++){
 				var page = createPage(pageNumber);
+				pages.push(page);
 				container.appendChild(page);
-				if (pageNumber == 1)
-					firstVisiblePage = page;
-				if (pageNumber == pageCount)
-					lastVisiblePage = page;
 			}
 		}
 	};
@@ -39,10 +38,14 @@ function Pagination(domId, placeholder) {
 	};
 
 	this.getFirstVisiblePage = function() {
-		return firstVisiblePage;
+		return pages[0];
 	};
 
 	this.getLastVisiblePage = function() {
-		return lastVisiblePage;
+		return pages[pages.length - 1];
+	};
+
+	this.getVisiblePagesCount = function() {
+		return pages.length;
 	};
 };
