@@ -1,4 +1,6 @@
 describe("JS pagination tests", function() {
+	var fakeDocument, pagination;
+
 	var createFakeDocument = function() {
 		var domId = 'fakeDocument';
 		var fakeDocument = document.getElementById(domId)
@@ -11,10 +13,12 @@ describe("JS pagination tests", function() {
 		return fakeDocument;
 	};
 
-	it("creates DOM element", function(){
-		var fakeDocument = createFakeDocument();
-		var pagination = new Pagination("pagination", fakeDocument);
+	beforeEach(function(){
+		fakeDocument = createFakeDocument();
+		pagination = new Pagination("pagination", fakeDocument);
+	});
 
+	it("creates DOM element", function(){
 		pagination.paginate({totalItems: 10, pageSize: 5});
 
 		var domElement = document.getElementById("pagination");
@@ -22,8 +26,6 @@ describe("JS pagination tests", function() {
 	});
 
 	it("does not create DOM element if exists", function(){
-		var fakeDocument = createFakeDocument();
-		var pagination = new Pagination("pagination", fakeDocument);
 		pagination.paginate({totalItems: 10, pageSize: 5});
 
 		pagination.paginate({totalItems: 10, pageSize: 5});
@@ -34,7 +36,7 @@ describe("JS pagination tests", function() {
 	});
 
 	it("uses defaults dom id and placeholder if not defined", function(){
-		var pagination = new Pagination();
+		pagination = new Pagination();
 
 		pagination.paginate({totalItems: 10, pageSize: 5});
 
