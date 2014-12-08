@@ -18,6 +18,18 @@ function Pagination(domId, placeholder) {
 		}
 	};
 
+	this.getFirstVisiblePage = function() {
+		return pages[0];
+	};
+
+	this.getLastVisiblePage = function() {
+		return pages[pages.length - 1];
+	};
+
+	this.getVisiblePagesCount = function() {
+		return pages.length;
+	};
+
 	var getVisiblePages = function(visiblePages, pageCount) {
 		if (!visiblePages || visiblePages > pageCount)
 			return pageCount;
@@ -71,23 +83,11 @@ function Pagination(domId, placeholder) {
         	pages[i].text = Number(pages[i].text) - 1;
 	};
 
-	this.getFirstVisiblePage = function() {
-		return pages[0];
-	};
-
 	var firstVisiblePage = function() {
 		return Number(self.getFirstVisiblePage().text);
 	};
 
 	var lastVisiblePage = function() {
 		return Number(self.getLastVisiblePage().text);
-	};
-
-	this.getLastVisiblePage = function() {
-		return pages[pages.length - 1];
-	};
-
-	this.getVisiblePagesCount = function() {
-		return pages.length;
 	};
 };
