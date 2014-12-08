@@ -18,6 +18,10 @@ describe("JS pagination tests", function() {
 		pagination = new Pagination("pagination", fakeDocument);
 	});
 
+	afterEach(function(){
+		fakeDocument.remove();
+	});
+
 	it("creates DOM element", function(){
 		pagination.paginate({totalItems: 10, pageSize: 5});
 
