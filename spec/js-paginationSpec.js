@@ -74,4 +74,13 @@ describe("JS pagination tests", function() {
 
 		expect(pagination.getVisiblePagesCount()).toBe(2);
 	});
+
+	it("show next page on last visible page clicked when there are more pages to show", function(){
+		pagination.paginate({totalItems: 3, pageSize: 1, visiblePages: 2});
+		
+		pagination.getLastVisiblePage().click();
+		
+		expect(pagination.getFirstVisiblePage().text).toBe('2');
+		expect(pagination.getLastVisiblePage().text).toBe('3');
+	});
 });

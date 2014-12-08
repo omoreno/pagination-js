@@ -40,7 +40,16 @@ function Pagination(domId, placeholder) {
 		var page = document.createElement('a');
 		page.text = pageNumber;
 		page.href = "#";
+		page.addEventListener("click", function(e) {
+			updatePagination();
+			e.preventDefault();
+		});
 		return page;
+	};
+
+	var updatePagination = function() {
+        for (var i = 0, len = pages.length; i < len; i++)
+            pages[i].text = Number(pages[i].text) + 1;
 	};
 
 	this.getFirstVisiblePage = function() {
