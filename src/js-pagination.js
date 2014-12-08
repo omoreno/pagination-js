@@ -17,6 +17,7 @@ function Pagination(domId, placeholder) {
 				pages.push(page);
 				container.appendChild(page);
 			}
+			pages[0].classList.add('active');
 			goToLastPageButton = createGoToLastPageButton(pagination.goToLastPageCaption);
 		}
 	};

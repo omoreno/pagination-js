@@ -152,4 +152,12 @@ describe("JS pagination tests", function() {
 
 		expect(pageClickedCallback).toHaveBeenCalledWith(1);
 	});
+
+	it("mark first page as active on initialize", function(){
+		pagination.paginate({totalItems: 2, pageSize: 1});
+		
+		var firstVisiblePage = pagination.getFirstVisiblePage();
+
+		expect(firstVisiblePage.classList).toContain("active");
+	});
 });
