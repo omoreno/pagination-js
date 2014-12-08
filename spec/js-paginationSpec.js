@@ -20,4 +20,16 @@ describe("JS pagination tests", function() {
 		var domElement = document.getElementById("pagination");
 		expect(domElement).not.toBeNull();
 	});
+
+	it("does not create DOM element if exists", function(){
+		var fakeDocument = createFakeDocument();
+		var pagination = new Pagination("pagination", fakeDocument);
+		pagination.paginate({totalItems: 10, pageSize: 5});
+
+		pagination.paginate({totalItems: 10, pageSize: 5});
+
+		var domElements = document.all("pagination");
+		expect(domElements).toBeDefined();
+		expect(domElements.length).not.toBeDefined();
+	});
 });

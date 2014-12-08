@@ -1,8 +1,10 @@
 function Pagination(domId, placeholder){
 	this.paginate = function(pagination){
-		var container = document.createElement('div');
-		container.id = domId;
-		placeholder.appendChild(container);
-		return container;
+		var container = document.getElementById(domId);
+		if (!container) {
+			container = document.createElement('div');
+			container.id = domId;
+			placeholder.appendChild(container);
+		}
 	};
 };
