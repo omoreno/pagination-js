@@ -3,32 +3,46 @@ function Pagination(domId, placeholder) {
 	var domId = domId || 'pagination';
 
 	this.paginate = function(pagination) {
-		var pageCount = Math.ceil(pagination.totalItems / pagination.pageSize);
+		var pageCount = getPageCount(pagination);
 		if (pageCount > 1) {
-			var container = document.getElementById(domId);
-			if (!container) {
-				container = document.createElement('div');
-				container.id = domId;
-				placeholder.appendChild(container);
-				for (var i = 1, len = pageCount; i <= len; i++){
-					var page = document.createElement('a');
-					page.text = i;
-					page.href = "#";
-					container.appendChild(page);
-					if (i == 1)
-						firstVisiblePage = page;
-					if (i == pageCount)
-						lastVisiblePage = page;
-				}
+			var container = createContainer(domId, placeholder);
+			for (var pageNumber = 1, len = pageCount; pageNumber <= len; pageNumber++){
+				var page = createPage(pageNumber);
+				container.appendChild(page);
+				if (pageNumber == 1)
+					firstVisiblePage = page;
+				if (pageNumber == pageCount)
+					lastVisiblePage = page;
 			}
 		}
 	};
 
-	this.getFirstVisiblePage = function(){
+	var getPageCount = function(pagination) {
+		return Math.ceil(pagination.totalItems / pagination.pageSize);
+	};
+
+	var createContainer = function(domId, placeholder) {
+		var container = document.getElementById(domId);
+		if (!container) {
+			container = document.createElement('div');
+			container.id = domId;
+			placeholder.appendChild(container);
+		}
+		return container;
+	};
+
+	var createPage = function(pageNumber) {
+		var page = document.createElement('a');
+		page.text = pageNumber;
+		page.href = "#";
+		return page;
+	};
+
+	this.getFirstVisiblePage = function() {
 		return firstVisiblePage;
 	};
 
-	this.getLastVisiblePage = function(){
+	this.getLastVisiblePage = function() {
 		return lastVisiblePage;
 	};
 };
