@@ -142,4 +142,14 @@ describe("JS pagination tests", function() {
 		expect(pagination.getLastVisiblePage().text).toBe('3');
 		expect(pageClickedCallback).toHaveBeenCalledWith(3);
 	});
+
+	it("fires event on page clicked", function(){
+		pagination.paginate({totalItems: 2, pageSize: 1});
+		var pageClickedCallback = jasmine.createSpy('pageClickedCallback');
+		pagination.onPageClickedCallback(pageClickedCallback);
+
+		pagination.getFirstVisiblePage().click();
+
+		expect(pageClickedCallback).toHaveBeenCalledWith(1);
+	});
 });

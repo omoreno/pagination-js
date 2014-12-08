@@ -102,6 +102,8 @@ function Pagination(domId, placeholder) {
 				showNextPage();
             else if (shouldShowPreviousPage(pageNumber))
 				showPreviousPage();
+
+			pageClickedCallback(pageNumber);
 			e.preventDefault();
 		});
 		return page;
