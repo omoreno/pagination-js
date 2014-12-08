@@ -93,4 +93,17 @@ describe("JS pagination tests", function() {
 		expect(pagination.getFirstVisiblePage().text).toBe('1');
 		expect(pagination.getLastVisiblePage().text).toBe('2');
 	});
+
+	it("show go to first page and go to last page buttons", function(){
+		var pagination = new Pagination("pagination", fakeDocument);
+		
+		pagination.paginate({totalItems: 2, pageSize: 1,
+							goToFirstPageCaption: "First Page",
+							goToLastPageCaption: "Last Page"});
+		
+		var goToFirstPageButton = pagination.getGoToFirstPageButton();
+		var goToLastPageButton = pagination.getGoToLastPageButton();
+		expect(goToFirstPageButton.text).toBe("First Page");
+		expect(goToLastPageButton.text).toBe("Last Page");
+	});
 });
