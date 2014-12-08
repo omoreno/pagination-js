@@ -160,4 +160,13 @@ describe("JS pagination tests", function() {
 
 		expect(firstVisiblePage.classList).toContain("active");
 	});
+
+	it("mark clicked page as active on click", function(){
+		pagination.paginate({totalItems: 2, pageSize: 1});
+		
+		pagination.getLastVisiblePage().click();
+
+		expect(pagination.getFirstVisiblePage().classList).not.toContain("active");
+		expect(pagination.getLastVisiblePage().classList).toContain("active");
+	});
 });

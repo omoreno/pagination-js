@@ -74,6 +74,8 @@ function Pagination(domId, placeholder) {
 		page.addEventListener("click", function(e) {
 			for (var i = 0, len = pages.length; i < len; i++)
         		pages[i].text = i + 1;
+
+        	markPageAsActive(1);
         	pageClickedCallback(1);
 			e.preventDefault();
 		});
@@ -87,6 +89,8 @@ function Pagination(domId, placeholder) {
 		page.addEventListener("click", function(e) {
 			for (var i = 0, len = pages.length; i < len; i++)
         		pages[i].text = visiblePages + i;
+
+        	markPageAsActive(pageCount);
         	pageClickedCallback(pageCount);
 			e.preventDefault();
 		});
@@ -104,10 +108,20 @@ function Pagination(domId, placeholder) {
             else if (shouldShowPreviousPage(pageNumber))
 				showPreviousPage();
 
+			markPageAsActive(pageNumber);
 			pageClickedCallback(pageNumber);
 			e.preventDefault();
 		});
 		return page;
+	};
+
+	var markPageAsActive = function(pageNumber) {
+		for (var i = 0, len = visiblePages; i < len; i++) {
+			pages[i].classList.remove('active');
+			if (Number(pages[i].text) == pageNumber)
+				pages[i].classList.add('active');
+		}
+
 	};
 
 	var shouldShowNextPage = function(pageNumber) {
