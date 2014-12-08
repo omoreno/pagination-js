@@ -130,4 +130,16 @@ describe("JS pagination tests", function() {
 		expect(pagination.getLastVisiblePage().text).toBe('2');
 		expect(pageClickedCallback).toHaveBeenCalledWith(1);
 	});
+
+	it("goes to last page on go to last page button clicked", function(){
+		pagination.paginate({totalItems: 3, pageSize: 1, visiblePages: 2});
+		var pageClickedCallback = jasmine.createSpy('pageClickedCallback');
+		pagination.onPageClickedCallback(pageClickedCallback);
+
+		pagination.getGoToLastPageButton().click();
+
+		expect(pagination.getFirstVisiblePage().text).toBe('2');
+		expect(pagination.getLastVisiblePage().text).toBe('3');
+		expect(pageClickedCallback).toHaveBeenCalledWith(3);
+	});
 });
