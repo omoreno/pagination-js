@@ -51,4 +51,11 @@ describe("JS pagination tests", function() {
 		var domElement = document.getElementById("pagination");
 		expect(domElement).toBeNull();
 	});
+
+	it("renders all pages", function(){
+		pagination.paginate({totalItems: 10, pageSize: 5});
+
+		expect(pagination.getFirstVisiblePage().text).toBe('1');
+		expect(pagination.getLastVisiblePage().text).toBe('2');
+	});
 });
