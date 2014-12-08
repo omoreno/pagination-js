@@ -106,4 +106,15 @@ describe("JS pagination tests", function() {
 		expect(goToFirstPageButton.text).toBe("First Page");
 		expect(goToLastPageButton.text).toBe("Last Page");
 	});
+
+	it("uses defaults go to first page and go to last captions if not provided", function(){
+		var pagination = new Pagination("pagination", fakeDocument);
+		
+		pagination.paginate({totalItems: 2, pageSize: 1});
+		
+		var goToFirstPageButton = pagination.getGoToFirstPageButton();
+		var goToLastPageButton = pagination.getGoToLastPageButton();
+		expect(goToFirstPageButton.text).toBe("<<");
+		expect(goToLastPageButton.text).toBe(">>");
+	});
 });

@@ -63,14 +63,14 @@ function Pagination(domId, placeholder) {
 
 	var createGoToFirstPageButton = function(caption) {
 		var page = document.createElement('a');
-		page.text = caption;
+		page.text = caption || "<<";
 		page.href = "#";
 		return page;
 	};
 
 	var createGoToLastPageButton = function(caption) {
 		var page = document.createElement('a');
-		page.text = caption;
+		page.text = caption || ">>";
 		page.href = "#";
 		return page;
 	};
