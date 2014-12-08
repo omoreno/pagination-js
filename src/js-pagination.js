@@ -5,9 +5,7 @@ function Pagination(domId, placeholder) {
 
 	this.paginate = function(pagination) {
 		var pageCount = getPageCount(pagination);
-		var visiblePages = pagination.visiblePages || pageCount;
-		if (visiblePages > pageCount)
-			visiblePages = pageCount;
+		var visiblePages = getVisiblePages(pagination.visiblePages, pageCount);
 		if (pageCount > 1) {
 			var container = createContainer(domId, placeholder);
 			for (var pageNumber = 1, len = visiblePages; pageNumber <= len; pageNumber++){
@@ -16,6 +14,12 @@ function Pagination(domId, placeholder) {
 				container.appendChild(page);
 			}
 		}
+	};
+
+	var getVisiblePages = function(visiblePages, pageCount) {
+		if (!visiblePages || visiblePages > pageCount)
+			return pageCount;
+		return visiblePages;
 	};
 
 	var getPageCount = function(pagination) {
